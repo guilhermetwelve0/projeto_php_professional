@@ -4,8 +4,9 @@ namespace app\controllers;
 
 class Home
 {
-    public function index()
+    public function index($params)
     {
-
+        var_dump($params);
     }
+
 }

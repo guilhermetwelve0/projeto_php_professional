@@ -1,6 +1,6 @@
 <?php
 
-function controller($matchedUri)
+function controller($matchedUri, $params)
 {
     [$controller, $method] = explode('@',array_values($matchedUri)[0]);
     $controllerWithNamespace = CONTROLLER_PATH . $controller;
@@ -15,5 +15,5 @@ function controller($matchedUri)
 
     }
 
-    $controllerInstance->$method();
+    $controllerInstance->$method($params);
 }
