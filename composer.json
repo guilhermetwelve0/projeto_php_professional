@@ -1,0 +1,22 @@
+{
+    "name": "guilh/php_pro",
+    "description": "php-profissional",
+    "autoload": {
+        "psr-4": {
+            "Guilh\\PhpPro\\": "app"
+        },
+        "files": [
+            "app/helpers/constants.php",
+            "app/router/router.php",
+            "app/core/controller.php"
+
+        ]
+    },
+    "authors": [
+        {
+            "name": "guilhermetwelve0",
+            "email": "guilherme.cabral999@hotmail.com"
+        }
+    ],
+    "require": {}
+}
