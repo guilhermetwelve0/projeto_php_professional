@@ -15,5 +15,5 @@ function controller($matchedUri, $params)
 
     }
 
-    $controllerInstance->$method($params);
+    return $controllerInstance->$method($params);
 }
