@@ -1,20 +1,20 @@
 {
-    "name": "guilh/projeto_php_professional",
-    "autoload": {
-                "files": [
-            "app/helpers/constants.php",
-            "app/router/router.php",
-            "app/core/controller.php"
-        ],
-        "psr-4": {
-            "Guilh\\ProjetoPhpProfessional\\": "app"
-        }
-    },
-    "authors": [
-        {
-            "name": "guilhermetwelve0",
-            "email": "guilherme.cabral999@hotmail.com"
-        }
+  "name": "guilh/projeto_php_professional",
+  "autoload": {
+    "files": [
+      "app/helpers/constants.php",
+      "app/router/router.php",
+      "app/core/controller.php"
     ],
-    "require": {}
+    "psr-4": {
+      "app\\": "app"
+    }
+  },
+  "authors": [
+    {
+      "name": "guilhermetwelve0",
+      "email": "guilherme.cabral999@hotmail.com"
+    }
+  ],
+  "require": {}
 }
