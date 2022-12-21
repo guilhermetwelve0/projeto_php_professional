@@ -8,4 +8,5 @@ class Home{
         var_dump($params);
         die();
     }
+
 }

@@ -8,4 +8,10 @@ class User
      var_dump('show');
      die();
     }
+
+    public function create($params)
+    {
+        var_dump($params['user']);
+        die();
+    }
 }
