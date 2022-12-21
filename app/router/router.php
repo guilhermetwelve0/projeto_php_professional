@@ -56,18 +56,21 @@ function router()
 
     $matchedUri = exactMatchUriInArrayRoutes($uri, $routes);
 
+
+    $params = [];
     if (empty($matchedUri)) {
         $matchedUri = regularExpressionMatchArrayRoutes($uri, $routes);
             $uri = explode('/',ltrim($uri, '/'));
             $params = params($uri, $matchedUri);
             $params = paramsFormat($uri, $params);
-
-            var_dump($params['user']);
-            die();
         
     }
 
 
-    var_dump($matchedUri);
-    die();
+    if (!empty($matchedUri)) {
+     controller($matchedUri, $params);
+     return;
+    }
+   throw new Exception("Algo deu errado");
+   
 }
