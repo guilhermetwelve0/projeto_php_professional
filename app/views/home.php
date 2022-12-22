@@ -2,7 +2,7 @@
 
 <ul>
     <?php foreach ($users as $user): ?>
-       <li><?php print_r($user->first_name); ?></li>
+       <li><?php echo $user->firstName; ?> | <a href="/user/<?php  echo $user->id; ?>">detalhes</a></li>
     <?php endforeach; ?>
 </ul>
 

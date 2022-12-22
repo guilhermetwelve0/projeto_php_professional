@@ -1,18 +1,10 @@
 <?php
 
-function routes()
-{
-    return require 'routes.php';
-}
-
 function exactMatchUriInArrayRoutes($uri, $routes)
-{
-
-    if (array_key_exists($uri, $routes)) {
-        return [$uri => $routes[$uri]];
-    }
-
-    return [];
+{ 
+    return (array_key_exists($uri, $routes)) ?
+    [$uri => $routes[$uri]] :
+    [];
 }
 
 function regularExpressionMatchArrayRoutes($uri, $routes)
@@ -39,7 +31,8 @@ function params($uri, $matchedUri)
     return [];
 }
 
-function paramsFormat($uri, $params){
+function paramsFormat($uri, $params)
+{
 
     $paramsData = [];
     foreach ($params as $index => $param) {
@@ -52,7 +45,7 @@ function router()
 {
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-    $routes = routes();
+    $routes =  require 'routes.php';
 
     $matchedUri = exactMatchUriInArrayRoutes($uri, $routes);
 
@@ -60,17 +53,14 @@ function router()
     $params = [];
     if (empty($matchedUri)) {
         $matchedUri = regularExpressionMatchArrayRoutes($uri, $routes);
-            $uri = explode('/',ltrim($uri, '/'));
-            $params = params($uri, $matchedUri);
-            $params = paramsFormat($uri, $params);
-        
+        $uri = explode('/', ltrim($uri, '/'));
+        $params = params($uri, $matchedUri);
+        $params = paramsFormat($uri, $params);
     }
 
 
     if (!empty($matchedUri)) {
-     return controller($matchedUri, $params);
-     
+        return controller($matchedUri, $params);
     }
-   throw new Exception("Algo deu errado");
-   
+    throw new Exception("Algo deu errado");
 }

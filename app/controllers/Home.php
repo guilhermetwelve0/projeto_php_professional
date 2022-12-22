@@ -10,7 +10,7 @@ class Home
 
         return [
             'view' => 'home.php',
-            'data' => ['users' => $users]
+            'data' => ['title' => 'Home','users' => $users]
         ];
     }
 }
