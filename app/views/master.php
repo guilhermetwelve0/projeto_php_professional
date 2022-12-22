@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Curso de php profissional</h2>
+    <h2><?php echo $name; ?></h2>
+    <div class="container">
+        <?php require VIEWS.$view; ?>
+    </div>
 </body>
 </html>
