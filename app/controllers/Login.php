@@ -33,4 +33,9 @@ class Login
         $_SESSION[LOGGED] = $user;
         return redirect('/');
     }
+
+    public function destroy(){
+        unset($_SESSION[LOGGED]);
+        return redirect('/');
+    }
 }
