@@ -17,20 +17,20 @@ class Login
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
         if (empty($email) || empty($password)) {
-            return redirect('/login');
+            return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
         }
 
         $user = findBy('users', 'email', $email);
 
         if (!$user) {
-            return redirect('/login');
+            return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
         }
-
+        
         if (!password_verify($password, $user->password)) {
-            return redirect('/login');
+            return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
         }
 
-        $_SESSION['logged'] = $user;
+        $_SESSION[LOGGED] = $user;
         return redirect('/');
     }
 }
