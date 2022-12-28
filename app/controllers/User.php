@@ -32,7 +32,14 @@ class User
         if (!$validate) {
             return redirect('/user/create');
         }
+
+        $validate['password'] = password_hash($validate['password'], PASSWORD_DEFAULT);
         //var_dump($validate);
-        create('users', $validate);
+        $created = create('users', $validate);
+        if (!$created) {
+            setFlash('message', 'Ocorreu um erro ao cadastrar, tente novamente em alguns segundo');
+            return redirect('/user/create');
+        }
+        return redirect('/'); 
     }
 }
