@@ -11,7 +11,9 @@
       "app/helpers/redirect.php",
       "app/helpers/flash.php",
       "app/helpers/sessions.php",
-      "app/helpers/validate.php"
+      "app/helpers/validate.php",
+      "app/helpers/validations.php",
+      "app/helpers/helpers.php"
     ],
     "psr-4": {
       "app\\": "app"
@@ -23,5 +25,9 @@
       "email": "guilherme.cabral999@hotmail.com"
     }
   ],
-  "require": {}
+  "require": {
+    "league/plates": "^3.4",
+    "symfony/var-dumper": "^6.0",
+    "larapack/dd": "1.*"
+  }
 }

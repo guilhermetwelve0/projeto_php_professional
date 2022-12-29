@@ -17,7 +17,7 @@ class User
     public function create()
     {
         return [
-            'view' => 'create.php',
+            'view' => 'create',
             'data' => ['title' => 'Create']
         ];
     }
@@ -26,12 +26,13 @@ class User
         $validate = validate([
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'email|unique:users',
-            'password' => 'required|maxlen:5',
+            'email' => 'email|required|unique:users',
+            'password' => 'maxlen:5|required',
         ]);
         if (!$validate) {
             return redirect('/user/create');
         }
+
 
         $validate['password'] = password_hash($validate['password'], PASSWORD_DEFAULT);
         //var_dump($validate);
@@ -40,6 +41,6 @@ class User
             setFlash('message', 'Ocorreu um erro ao cadastrar, tente novamente em alguns segundo');
             return redirect('/user/create');
         }
-        return redirect('/'); 
+        return redirect('/');
     }
 }

@@ -15,19 +15,33 @@ try {
         throw new Exception('O índice title está faltando');
     }
 
-    
+
     if (!isset($data['view'])) {
         throw new Exception('O índice view está faltando');
     }
-    
-    if (!file_exists(VIEWS . $data['view'])) {
+
+    if (!file_exists(VIEWS . $data['view'] . '.php')) {
         throw new Exception("Essa view {$data['view']} não existe");
     }
-    extract($data['data']);
 
-    $view = $data['view'];
+    $arr = [
+        "firstName" => "Guilherme",
+        "lastName" => "Cabral",
+        "email" => "cabral9999@hotmail.com",
+        "password" => "1234",
+    ];
 
-    require VIEWS . 'master.php';
+
+    $templates = new League\Plates\Engine(VIEWS);
+
+    //Render a template
+    echo $templates->render($data['view'], $data['data']);
+
+    // extract($data['data']);
+
+    // $view = $data['view'];
+
+    // require VIEWS . 'master.php';
 } catch (Exception $e) {
     var_dump($e->getMessage());
 }
