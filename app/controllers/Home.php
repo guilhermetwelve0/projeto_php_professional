@@ -9,7 +9,7 @@ class Home
         $users = all('users');
         return [
             'view' => 'home',
-            'data' => ['title' => 'Home','users' => $users]
+            'data' => ['title' => 'Home', 'users' => $users]
         ];
     }
 }
