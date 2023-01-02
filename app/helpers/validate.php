@@ -1,17 +1,27 @@
 <?php
 
-function validate(array $validations)
+function validate(array $validations, bool $persistInputs = false, bool $checkCsrf = false)
 {
+    if ($checkCsrf) {
+        checkCsrf();
+    }
     $result = [];
-    $param =  '';
+    $param = '';
     foreach ($validations as $field => $validate) {
         $result[$field] = (!str_contains($validate, '|')) ?
             singleValidation($validate, $field, $param) :
             multipleValidations($validate, $field, $param);
     }
-    if (in_array(false, $result)) {
+
+
+    if ($persistInputs) {
+        setOld();
+    }
+
+    if (in_array(false, $result, true)) {
         return false;
     }
+
     return $result;
 }
 
@@ -31,8 +41,10 @@ function multipleValidations($validate, $field, $param)
         if (str_contains($validate, ':')) {
             [$validate, $param] = explode(':', $validate);
         }
+
         $result[$field] = $validate($field, $param);
-        if (isset($result[$field]) and $result[$field] === false) {
+
+        if ($result[$field] === false || $result[$field] === null) {
             break;
         }
     }
