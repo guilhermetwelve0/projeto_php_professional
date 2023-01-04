@@ -3,6 +3,9 @@
 require 'bootstrap.php';
 
 try {
+    if ($ENV['MAINTENANCE'] === 'true') {
+
+    }
     $data = router();
 
     if (isAjax()) {
