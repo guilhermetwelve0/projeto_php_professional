@@ -9,48 +9,157 @@ function read(string $table, string $fields = '*')
     $query['execute'] = [];
     $query['sql'] = "select {$fields} from {$table}";
 }
-function where(string $field, string $operator, string|int $value)
+function limit(string|int $limit)
 {
     global $query;
+    $query['limit'] = true;
+    if (isset($query['paginate'])) {
+        throw new Exception("O limite não pode ser chamado com a paginação");
+    }
+    $query['sql'] = "{$query['sql']} limit {$limit}";
+}
+function order(string $by, string $order = 'asc')
+{
+    global $query;
+    if (isset($query['limit'])) {
+        throw new Exception("O order não pode vir depois do limit");
+    }
+    if (isset($query['paginate'])) {
+        throw new Exception("O order não pode vir depois da paginação");
+    }
+    $query['sql'] = "{$query['sql']} order by {$by} {$order}";
+}
+function paginate(string|int $perPage = 10)
+{
+    global $query;
+    if (isset($query['limit'])) {
+        throw new Exception("A paginação não pode ser chamada com o limite");
+    }
+    $query['paginate'] = true;
+}
+function where()
+{
+    global $query;
+    $args = func_get_args();
+    $numArgs = func_num_args();
+    //dd($args);
     if (!isset($query['read'])) {
         throw new Exception('Antes de chamar o where chame o read');
     }
-    if (func_num_args() !== 3) {
-        throw new Exception('o where precisa de exatamente 3 parâmetros');
+    if ($numArgs < 2 || $numArgs > 3) {
+        throw new Exception('o where precisa de 2 ou 3 parâmetros');
+    }
+    if ($numArgs === 2) {
+        $field = $args[0];
+        $operator = '=';
+        $value = $args[1];
+    }
+    if ($numArgs === 3) {
+        $field = $args[0];
+        $operator = $args[1];
+        $value = $args[2];
     }
     $query['where'] = true;
     $query['execute'] = array_merge($query['execute'], [$field => $value]);
     $query['sql'] = "{$query['sql']} where {$field} {$operator} :{$field}";
 }
-function orwhere()
+// function where(string $field, string $operator, string|int $value)
+// {
+//     global $query;
+//     if (!isset($query['read'])) {
+//         throw new Exception('Antes de chamar o where chame o read');
+//     }
+//     if (func_num_args() !== 3) {
+//         throw new Exception('o where precisa de exatamente 3 parâmetros');
+//     }
+//     $query['where'] = true;
+//     $query['execute'] = array_merge($query['execute'], [$field => $value]);
+//     $query['sql'] = "{$query['sql']} where {$field} {$operator} :{$field}";
+// }
+function orWhere()
 {
     global $query;
-    if (!isset($query['where'])) {
-        throw new Exception('Precisa executar o where antes do or where');
+    $args = func_get_args();
+    $numArgs = func_num_args();
+    if (!isset($query['read'])) {
+        throw new Exception('Antes de chamar o where chame o read');
     }
-    $query['sql'] = "{$query['sql']} or ";
+    if (!isset($query['where'])) {
+        throw new Exception('Antes de chamar o orWhere chame o where');
+    }
+    if ($numArgs < 2 || $numArgs > 4) {
+        throw new Exception('o where precisa de 2 até 4 parâmetros');
+    }
+    $data = match ($numArgs) {
+        2 => whereTwoParameters($args),
+        3 => whereThreeParameters($args),
+        4 => whereFourParameters($args),
+    };
+
+    [$field, $operator, $value, $typeWhere] = $data;
+
+
+    //dd([$field => $value]);
+    $query['where'] = true;
+    $query['execute'] = array_merge($query['execute'], [$field => $value]);
+    $query['sql'] = "{$query['sql']} {$typeWhere} {$field} {$operator} :{$field}";
 }
+function whereTwoParameters(array $args):array
+{
+    $field = $args[0];
+    $operator = '=';
+    $value = $args[1];
+    $typeWhere = 'or';
+    return [$field, $operator, $value, $typeWhere];
+}
+function whereThreeParameters(array $args):array
+{
+    $operators = ['=', '<', '>', '!==', '<=', '>='];
+    $field = $args[0];
+    $operator =  in_array($args[1], $operators) ? $args[1] : '=';
+    $value = in_array($args[1], $operators) ? $args[2] : $args[1];
+    $typeWhere = $args[2] === 'and' ? 'and' : 'or';
+
+    return [$field, $operator, $value, $typeWhere];
+}
+function whereFourParameters(array $args):array
+{
+    $field = $args[0];
+    $operator = $args[1];
+    $value = $args[2];
+    $typeWhere = $args[3];
+    return [$field, $operator, $value, $typeWhere];
+}
+
+// function orWhere(string $field, string $operator, string|int $value, string $typeWhere = 'or')
+// {
+//     global $query;
+//     if (!isset($query['read'])) {
+//         throw new Exception('Antes de chamar o where chame o read');
+//     }
+//     if (!isset($query['where'])) {
+//         throw new Exception('Antes de chamar o orWhere chame o where');
+//     }
+//     if (func_num_args() < 3 or func_num_args() > 4) {
+//         throw new Exception('o where precisa de 3 ou 4 parâmetros');
+//     }
+//     $query['where'] = true;
+//     $query['execute'] = array_merge($query['execute'], [$field => $value]);
+//     $query['sql'] = "{$query['sql']} {$typeWhere} {$field} {$operator} :{$field}";
+// }
+
 function search()
 {
 }
-function paginate()
-{
-}
-function limit()
-{
-}
-function order()
-{
-    global $query;
-    $query['execute'] = array_merge($query['execute'], ['teste' => 45]);
-}
+
+
 function execute()
 {
     global $query;
     $connect = connect();
-    // $prepare = $connect->prepare($query['sql']);
-    // $prepare->execute($query['execute'] ?? []);
     dd($query);
+    $prepare = $connect->prepare($query['sql']);
+    $prepare->execute($query['execute'] ?? []);
     return $prepare->fetchAll();
 }
 

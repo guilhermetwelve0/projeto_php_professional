@@ -10,6 +10,7 @@
       "app/database/update.php",
       "app/database/delete.php",
       "app/database/create.php",
+      "app/helpers/csrf.php",
       "app/helpers/redirect.php",
       "app/helpers/flash.php",
       "app/helpers/sessions.php",
@@ -30,6 +31,7 @@
   "require": {
     "league/plates": "^3.4",
     "symfony/var-dumper": "^6.0",
-    "larapack/dd": "1.*"
+    "larapack/dd": "1.*",
+    "vlucas/phpdotenv": "^5.5"
   }
 }

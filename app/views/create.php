@@ -4,6 +4,7 @@
 
 <?php echo getFlash('message'); ?>
 <form action="/user/store" method="post">
+    <?php echo getCsrf(); ?>
     <input type="text" name="firstName" placeholder="Seu nome">
     <?php echo getFlash('firstName'); ?>
     <br>
