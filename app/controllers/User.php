@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+session_start();
+require_once '../app/helpers/validate.php';
 class User
 {
     public function show($params)
@@ -21,11 +23,11 @@ class User
             redirect('/');
         }
 
-        // read('users', 'users.id,firstName,lastName,email,password,path');
-        // tableJoin('photos', 'id', 'left');
-        // where('users.id', user()->id);
+        read('users', 'users.id,firstName,lastName,email,password,path');
+        //tableJoin('photos', 'id', 'left');
+        where('users.id', user()->id);
 
-        // $user = execute(isFetchAll: false);
+        //$user = execute(isFetchAll: false);
 
         // return [
         //     'view'  => 'edit',

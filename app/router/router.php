@@ -1,10 +1,10 @@
 <?php
 
 function exactMatchUriInArrayRoutes($uri, $routes)
-{ 
+{
     return (array_key_exists($uri, $routes)) ?
-    [$uri => $routes[$uri]] :
-    [];
+        [$uri => $routes[$uri]] :
+        [];
 }
 
 function regularExpressionMatchArrayRoutes($uri, $routes)
@@ -63,5 +63,7 @@ function router()
     if (!empty($matchedUri)) {
         return controller($matchedUri, $params);
     }
+
+    dd($matchedUri);
     throw new Exception("Algo deu errado");
 }

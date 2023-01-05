@@ -110,4 +110,3 @@ module.exports = __webpack_require__(/*! ./public/assets/js/app.js */"./public/a
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.js.map

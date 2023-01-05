@@ -5,6 +5,7 @@ function validate(array $validations, bool $persistInputs = false, bool $checkCs
     if ($checkCsrf) {
         checkCsrf();
     }
+
     $result = [];
     $param = '';
     foreach ($validations as $field => $validate) {
@@ -12,7 +13,6 @@ function validate(array $validations, bool $persistInputs = false, bool $checkCs
             singleValidation($validate, $field, $param) :
             multipleValidations($validate, $field, $param);
     }
-
 
     if ($persistInputs) {
         setOld();
