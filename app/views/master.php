@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $this->e($title) ?></title>
     <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+    <?=$this->section('styles')?>
 </head>
 
 <body>
@@ -16,6 +17,7 @@
     <div class="container">
         <?= $this->section('content') ?>
     </div>
+    <script src="/app.js"></script>
     <?= $this->section('scripts') ?>
 </body>
 

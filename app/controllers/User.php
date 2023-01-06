@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-session_start();
 require_once '../app/helpers/validate.php';
 class User
 {
