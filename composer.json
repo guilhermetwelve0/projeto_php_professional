@@ -16,7 +16,8 @@
       "app/helpers/sessions.php",
       "app/helpers/validate.php",
       "app/helpers/validations.php",
-      "app/helpers/helpers.php"
+      "app/helpers/helpers.php",
+      "app/helpers/old.php"
     ],
     "psr-4": {
       "app\\": "app"
@@ -32,6 +33,7 @@
     "league/plates": "^3.4",
     "symfony/var-dumper": "^6.0",
     "larapack/dd": "1.*",
-    "vlucas/phpdotenv": "^5.5"
+    "vlucas/phpdotenv": "^5.5",
+    "doctrine/inflector": "^2.0"
   }
 }
