@@ -14,7 +14,7 @@ class Home
         if($search){
             search(['firstName' => $search]);
         }
-        //paginate(5);
+        paginate(5);
         // tableJoinWithFK('users', 'id');
         // where('firstName', 'Andy Kuphal');
         //where('id','>',10);
