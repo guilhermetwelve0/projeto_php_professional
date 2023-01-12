@@ -31,6 +31,7 @@
     "symfony/var-dumper": "^6.0",
     "larapack/dd": "1.*",
     "vlucas/phpdotenv": "^5.5",
-    "doctrine/inflector": "^2.0"
+    "doctrine/inflector": "^2.0",
+    "phpmailer/phpmailer": "^6.7"
   }
 }
