@@ -14,3 +14,16 @@ function config()
 
     return $phpmailer;
 }
+
+function send(stdClass|array $emailData)
+{
+    $mail = config();
+    $mail->setFrom($emailData->fromEmail, $emailData->fromName);
+    $mail->addAddress($emailData->toEmail, $emailData->toName);
+    $mail->isHTML(true);
+    $mail->Subject = $emailData->subject;
+    $mail->Body    = $emailData->message;
+    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    return $mail->send();
+}
