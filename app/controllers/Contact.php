@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 use stdClass;
 
 class Contact
@@ -16,9 +18,9 @@ class Contact
 
     public function store()
     {
-        $email = new stdClass;
-        $email->fromName = 'Alexandre';
-        $email->fromEmail = 'xandecar@hotmail.com';
+        $email = new stdClass();
+        $email->fromName = 'guilherme cabral';
+        $email->fromEmail = 'rlacabral4@gmail.com';
         $email->ToName = 'Joao';
         $email->ToEmail = 'joao@email.com.br';
         $email->subject = 'teste de mensagem';
