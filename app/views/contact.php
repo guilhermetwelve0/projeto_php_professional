@@ -9,7 +9,7 @@
     <input type="text" name="email" placeholder="Seu email" value="<?php echo getOld('email'); ?>"> <br>
     <?php echo getFlash('email'); ?>
     <input type="text" name="subject" placeholder="Assunto" value="<?php echo getOld('subject'); ?>"> <br>
-    <?php echo getFlash('email'); ?>
+    <?php echo getFlash('subject'); ?>
     <textarea placeholder="Mensagem" name="message"><?php echo getOld('subject'); ?></textarea> <br>
     <?php echo getFlash('message'); ?>
 

@@ -2,10 +2,7 @@
 
 namespace app\controllers;
 
-use PHPMailer\PHPMailer\PHPMailer;
-
 use stdClass;
-
 class Contact
 {
     public function index()
@@ -15,7 +12,6 @@ class Contact
             'data' => ['title' => 'Contact',],
         ];
     }
-
     public function store()
     {
         $email = new stdClass();
@@ -29,4 +25,5 @@ class Contact
         $sent = send($email);
         dd($sent);
     }
+
 }
