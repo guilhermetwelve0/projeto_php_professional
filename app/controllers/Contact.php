@@ -14,15 +14,26 @@ class Contact
     }
     public function store()
     {
-        $email = new stdClass();
-        $email->fromName = 'guilherme cabral';
-        $email->fromEmail = 'rlacabral4@gmail.com';
-        $email->ToName = 'Joao';
-        $email->ToEmail = 'joao@email.com.br';
-        $email->subject = 'teste de mensagem';
-        $email->message = 'mensagem simples';
 
-        $sent = send($email);
+        // $email = new stdClass();
+        // $email->fromName = 'Alexandre';
+        // $email->fromEmail = 'xandercar@hotmail.com';
+        // $email->toName = 'Joao';
+        // $email->toEmail = 'joao@email.com.br';
+        // $email->subject = 'teste de mensagem';
+        // $email->message = 'mensagem simples';
+        // $email->template = 'contact';
+
+        $sent = send([
+            'fromName' => 'Alexandre',
+            'fromEmail' => 'xandecar@hotmail.com',
+            'toName' => 'Joao',
+            'toEmail' => 'joao@email.com.br',
+            'subject' => 'Assunto com array',
+            'message' => 'mensagem com um array',
+            'template' => 'contact'
+
+        ]);
         dd($sent);
     }
 
