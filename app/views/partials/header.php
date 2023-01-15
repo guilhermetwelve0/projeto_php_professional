@@ -9,6 +9,7 @@
     Bem vindo,
     <?php if (logged()) : ?>
         <?php echo user()->firstName; ?> | <a href="/logout">Logout</a>
+        <a href="/user/edit/profile">Edit profile</a>
     <?php else : ?>
         visitante
     <?php endif; ?>
