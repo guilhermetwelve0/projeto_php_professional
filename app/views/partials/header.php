@@ -8,6 +8,9 @@
 <div id="status_login">
     Bem vindo,
     <?php if (logged()) : ?>
+        <?php if(user()->path): ?>
+            <img src="<?php echo user()->path ?>" class>
+            <?php endif; ?>
         <?php echo user()->firstName; ?> | <a href="/logout">Logout</a>
         <a href="/user/edit/profile">Edit profile</a>
     <?php else : ?>

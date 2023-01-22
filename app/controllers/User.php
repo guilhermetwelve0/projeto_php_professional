@@ -44,7 +44,7 @@ class User
             return redirect('/user/create');
         }
 
-        dd($validate);
+        //dd($validate);
 
         $validate['password'] = password_hash($validate['password'], PASSWORD_DEFAULT);
 

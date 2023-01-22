@@ -17,3 +17,5 @@ function create(string $table, array $data)
         var_dump($e->getMessage());
     }
 }
+
+//nessa função preciso que seja criado um usuario contudo não estou conseguindo oque fazer

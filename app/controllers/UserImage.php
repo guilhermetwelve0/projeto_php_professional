@@ -18,15 +18,21 @@ class UserImage
                 ], [
                     'userId' => $auth->id
                 ]);
+                @unlink($photoUser->path);
             } else {
                 $updated = create('photos', [
                     'userId' => $auth->id,
                     'path' => $path
                 ]);
             }
-            dd($updated);
+            if($updated){
+                setMessageAndRedirect('upload_success','Upload feito com sucesso','/user/edit/profile');
+                return;
+            }
+            setMessageAndRedirect('upload_error','Ocorreu um erro ao fazer o upload','/user/edit/profile');
         } catch (\Exception $e) {
             setMessageAndRedirect('upload_error', $e->getMessage(), '/user/edit/profile');
         }
     }
 }
+

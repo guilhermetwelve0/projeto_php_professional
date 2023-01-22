@@ -14,6 +14,7 @@ function create(string $table, array $data)
         $sql .= ':' . implode(',:', array_keys($data)) . ")";
 
         $prepare = $connect->prepare($sql);
+        $prepare->execute(); 
         return $prepare->execute($data);
     } catch (PDOException $e) {
         var_dump($e->getMessage());

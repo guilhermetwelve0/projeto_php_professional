@@ -10,7 +10,7 @@ class Contact
     {
         return [
             'view' => 'contact',
-            'data' => ['title' => 'Contact',],
+            'data' => ['title' => 'Contact'],
         ];
     }
     public function store()
@@ -46,6 +46,8 @@ class Contact
             'template' => 'contact'
 
         ]);
+
+        
 
         if($sent){
             return setMessageAndRedirect('contact_success','Enviado com sucesso','/contact');
