@@ -16,3 +16,5 @@ function delete(string $table, array $where)
     $prepare->execute($where);
     return $prepare->rowCount();
 }
+
+//crie na view home a opção para deletar um usuário

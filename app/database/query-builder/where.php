@@ -31,9 +31,15 @@ function where()
         $value = $args[2];
     }
 
+    $fieldWhere = $field;
+
+    if (str_contains($field, '.')) {
+        [, $fieldWhere] = explode('.', $field);
+    }
+
     $query['where'] = true;
-    $query['execute'] = array_merge($query['execute'], [$field => $value]);
-    $query['sql'] = "{$query['sql']} where {$field} {$operator} :{$field}";
+    $query['execute'] = array_merge($query['execute'], [$fieldWhere => $value]);
+    $query['sql'] = "{$query['sql']} where {$field} {$operator} :{$fieldWhere}";
 }
 
 
@@ -66,7 +72,6 @@ function orWhere()
     [$field, $operator, $value, $typeWhere] = $data;
 
     // dd([$field => $value]);
-
     $query['where'] = true;
     $query['execute'] = array_merge($query['execute'], [$field => $value]);
     $query['sql'] = "{$query['sql']} {$typeWhere} {$field} {$operator} :{$field}";
@@ -91,6 +96,7 @@ function whereThreeParameters(array $args): array
 
     return [$field, $operator, $value, $typeWhere];
 }
+
 function whereIn(string $field, array $data)
 {
     global $query;
@@ -102,6 +108,7 @@ function whereIn(string $field, array $data)
     $query['where'] = true;
     $query['sql'] = "{$query['sql']} where {$field} in (" . '\'' . implode('\',\'', $data) . '\'' . ')';
 }
+
 
 // function where(string $field, string $operator, string|int $value)
 // {

@@ -4,7 +4,7 @@ function execute(bool $isFetchAll = true, bool $rowCount = false)
 {
     global $query;
 
-    //dd($query);
+    // dd($query);
 
     try {
         $connect = connect();
@@ -13,7 +13,7 @@ function execute(bool $isFetchAll = true, bool $rowCount = false)
             throw new Exception("Precisa ter o sql para executar a query");
         }
 
-        //dd($query['sql']);
+        // dd($query);
 
         $prepare = $connect->prepare($query['sql']);
         $prepare->execute($query['execute'] ?? []);
@@ -24,7 +24,7 @@ function execute(bool $isFetchAll = true, bool $rowCount = false)
         }
 
         if ($isFetchAll) {
-            return (object) [
+            return (object)[
                 'count' => $query['count'] ?? $prepare->rowCount(),
                 'rows' => $prepare->fetchAll()
             ];
@@ -33,13 +33,14 @@ function execute(bool $isFetchAll = true, bool $rowCount = false)
         return $prepare->fetch();
     } catch (Exception $e) {
         // $message = "Erro no arquivo {$e->getFile()} na linha {$e->getLine()} com a mensagem: {$e->getMessage()}";
-        // $message .= $query['sql'];
+        // $message.= $query['sql'];
         $error = [
             'file' => $e->getFile(),
             'line' => $e->getLine(),
             'message' => $e->getMessage(),
             'sql' => $query['sql'],
         ];
+
         ddd($error);
     }
 }

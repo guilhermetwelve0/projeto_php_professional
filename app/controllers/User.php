@@ -15,11 +15,22 @@ class User
         die();
     }
 
+
     public function edit()
     {
+        if (!logged()) {
+            redirect('/');
+        }
+
+        read('users', 'users.id,firstName,lastName,email,password,path');
+        tableJoin('photos', 'id', 'left');
+        where('users.id', user()->id);
+
+        $user = execute(isFetchAll: false);
+
         return [
             'view'  => 'edit',
-            'data' => ['title' => 'Edit']
+            'data' => ['title' => 'Edit', 'user' => $user]
         ];
     }
 
@@ -44,8 +55,6 @@ class User
             return redirect('/user/create');
         }
 
-        //dd($validate);
-
         $validate['password'] = password_hash($validate['password'], PASSWORD_DEFAULT);
 
         $created = create('users', $validate);
@@ -56,5 +65,31 @@ class User
         }
 
         return redirect('/');
+    }
+
+    public function update($args)
+    {
+        if (!isset($args['user'])) {
+            return redirect('/');
+        }
+
+        $validated = validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'email' => 'required|email|uniqueUpdate:id=' . $args['user']
+        ]);
+
+
+        if (!$validated) {
+            return redirect('/user/edit/profile');
+        }
+
+        $updated = update('users', $validated, ['id' => $args['user']]);
+
+        if ($updated) {
+            setMessageAndRedirect('updated_success', 'Atualizado com sucesso', '/user/edit/profile');
+            return;
+        }
+        setMessageAndRedirect('updated_error', 'Ocorreu um erro ao atualizar', '/user/edit/profile');
     }
 }

@@ -19,4 +19,7 @@ function create(string $table, array $data)
     } catch (PDOException $e) {
         var_dump($e->getMessage());
     }
+    return $prepare->execute($data);
 }
+
+
