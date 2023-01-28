@@ -12,7 +12,7 @@ function update(string $table, array $fields, array $where)
     foreach (array_keys($fields) as $field) {
         $sql .= "$field = :{$field}, ";
     }
-
+    
     $sql = trim($sql, ', ');
 
     $whereFields = array_keys($where);

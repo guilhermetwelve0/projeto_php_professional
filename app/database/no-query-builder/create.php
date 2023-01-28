@@ -20,6 +20,4 @@ function create(string $table, array $data)
         var_dump($e->getMessage());
     }
     return $prepare->execute($data);
-}
-
-
+ }

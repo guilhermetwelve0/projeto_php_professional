@@ -6,8 +6,10 @@ function fieldFK(string $table, string $field)
 {
     $inflector = InflectorFactory::create()->build();
     $tableToSingular = $inflector->singularize($table);
+
     return $tableToSingular . ucfirst($field);
 }
+
 
 function tableJoin(string $table, string $fieldFK, string $typeJoin = 'inner')
 {

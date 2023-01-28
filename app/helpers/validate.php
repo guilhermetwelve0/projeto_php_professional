@@ -1,6 +1,5 @@
 <?php
 
-require_once '../app/helpers/validate.php';
 
 function validate(array $validations, bool $persistInputs = false, bool $checkCsrf = false)
 {

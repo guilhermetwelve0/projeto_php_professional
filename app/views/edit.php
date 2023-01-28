@@ -1,6 +1,6 @@
 <?php $this->layout('master', ['title' => $title]) ?>
 
-<?php echo getFlash('updated_success', 'color:green' ); ?>
+<?php echo getFlash('updated_success', 'color:green'); ?>
 <?php echo getFlash('updated_error'); ?>
 
 <form method="post" action="/user/<?php echo $user->id ?>">
@@ -10,6 +10,19 @@
   <?php echo getFlash('lastName'); ?>
   <input type="text" name="email" value="<?php echo $user->email ?>">
   <?php echo getFlash('email'); ?>
+  <button type="submit">Atualizar</button>
+</form>
+
+<hr>
+
+<form action="/password/user/<?php echo $user->id ?>" method="post">
+
+  <?php echo getCsrf(); ?>
+  <input type="text" name="password">
+  <?php echo getFlash('password'); ?>
+  <input type="text" name="password_confirmation">
+  <?php echo getFlash('password_confirmation'); ?>
+
   <button type="submit">Atualizar</button>
 </form>
 

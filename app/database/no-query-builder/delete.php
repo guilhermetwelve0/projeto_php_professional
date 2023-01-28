@@ -3,7 +3,7 @@
 function delete(string $table, array $where)
 {
     if (!arrayIsAssociative($where)) {
-        throw new Exception("O array te que ser associativo no delete");
+        throw new Exception("O array tem que ser associativo no delete");
     }
 
     $connect = connect();
@@ -12,9 +12,8 @@ function delete(string $table, array $where)
 
     $sql = "delete from {$table} where";
     $sql .= " {$whereField[0]} = :{$whereField[0]}";
+
     $prepare = $connect->prepare($sql);
     $prepare->execute($where);
     return $prepare->rowCount();
 }
-
-//crie na view home a opção para deletar um usuário
