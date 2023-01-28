@@ -10,14 +10,12 @@ function create(string $table, array $data)
         $connect = connect();
 
         $sql = "insert into {$table}(";
-        $sql .= implode(',', array_keys($data)) . ") values(";
-        $sql .= ':' . implode(',:', array_keys($data)) . ")";
+        $sql.= implode(',', array_keys($data)).") values(";
+        $sql.= ':'.implode(',:', array_keys($data)).")";
 
         $prepare = $connect->prepare($sql);
-        $prepare->execute(); 
         return $prepare->execute($data);
     } catch (PDOException $e) {
         var_dump($e->getMessage());
     }
-    return $prepare->execute($data);
- }
+}

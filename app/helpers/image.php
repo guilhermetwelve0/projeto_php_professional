@@ -33,11 +33,11 @@ function isImage($extension)
 function resize(int $width, int $height, int $newWidth, int $newHeight)
 {
     $ratio = $width / $height;
-    if ($newWidth / $newHeight > $ratio) {
-        $newWidth = $newWidth * $ratio;
-    } else {
+
+    ($newWidth / $newHeight > $ratio) ?
+        $newWidth = $newHeight * $ratio :
         $newHeight = $newWidth / $ratio;
-    }
+
     return [$newWidth, $newHeight];
 }
 
@@ -50,8 +50,8 @@ function crop(int $width, int $height, int $newWidth, int $newHeight)
     $dstAspect = $thumbWidth / $thumbHeight;
 
     ($srcAspect >= $dstAspect) ?
-        $newWidth = $width / ($height / $thumbHeight) : $newHeight = $height / ($width / $thumbWidth);
-
+        $newWidth = $width / ($height / $thumbHeight) :
+        $newHeight = $height / ($width / $thumbWidth);
 
     return [$newWidth, $newHeight, $thumbWidth, $thumbHeight];
 }
@@ -59,11 +59,17 @@ function crop(int $width, int $height, int $newWidth, int $newHeight)
 function upload(int $newWidth, int $newHeight, string $folder, string $type = 'resize')
 {
     isFileToUpload('file');
+
     $extension = getExtension($_FILES['file']['name']);
+
     isImage($extension);
+
     [$width, $height] = getimagesize($_FILES['file']['tmp_name']);
-    [$functionCreateFrom, $saveImage] =  getFunctionCreateFrom($extension);
-    $src = $functionCreateFrom($_FILES['file']['tmp_name']);
+
+    [$functionCrateFrom, $saveImage] = getFunctionCreateFrom($extension);
+
+    $src = $functionCrateFrom($_FILES['file']['tmp_name']);
+
     if ($type === 'resize') {
         [$newWidth, $newHeight] = resize($width, $height, $newWidth, $newHeight);
         $dst = imagecreatetruecolor($newWidth, $newHeight);
@@ -84,7 +90,10 @@ function upload(int $newWidth, int $newHeight, string $folder, string $type = 'r
             $height
         );
     }
+
     $path = $folder . DIRECTORY_SEPARATOR . rand() . '.' . $extension;
+
     $saveImage($dst, $path);
+
     return $path;
 }

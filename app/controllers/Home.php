@@ -10,28 +10,39 @@ class Home
 
         read('users', 'id,firstName,lastName');
 
-        // dd(http_build_query(['page' => 1,'s' => 'Rory Davis','age' => 32]));
-        if($search){
+        if ($search) {
             search(['firstName' => $search]);
         }
+
         paginate(5);
-        // tableJoinWithFK('users', 'id');
-        // where('firstName', 'Andy Kuphal');
-        //where('id','>',10);
-        // whereIn('firstName', ['Ima Klein', 'Jennings McDermott', 'Aaliyah Goodwin']);
-        //  if ($search) {
-        //      search(['firstName' => $search, 'lastName' => $search]);
-        //  }
-        //  limit(10);
+
+        // where('id', '<', 20);
+        // whereIn('firstName', ['Alexandre','Prof. Lulu Ullrich','Loma Champlin']);
+
+        // if ($search) {
+        //     search(['firstName' => $search,'lastName' => $search]);
+        // }
+
+        // limit(10);
+
+
+        // select * from users where firstName like %alexandre% or lastName like %alexandre% or age
+
         $users = execute();
-        //dd($users);
 
         // dd($users);
 
-        //dd($users);
+        // dd($users);
+
+        // dd($users);
+
+        // select * from users order by id desc limit 10 offset 0
+
+        // dd($users);
+
         return [
             'view' => 'home',
-            'data' => ['title' => 'Home', 'users' => $users,'links' => render()]
+            'data' => ['title' => 'Home', 'users' => $users,'links' => render()],
         ];
     }
 }

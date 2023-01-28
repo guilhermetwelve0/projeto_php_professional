@@ -7,7 +7,7 @@ function fieldFK(string $table, string $field)
     $inflector = InflectorFactory::create()->build();
     $tableToSingular = $inflector->singularize($table);
 
-    return $tableToSingular . ucfirst($field);
+    return $tableToSingular.ucfirst($field);
 }
 
 

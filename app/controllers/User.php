@@ -11,7 +11,6 @@ class User
         }
 
         $user = findBy('users', 'id', $params['user']);
-        var_dump($user);
         die();
     }
 
@@ -26,15 +25,15 @@ class User
         tableJoin('photos', 'id', 'left');
         where('users.id', user()->id);
 
-        $user = execute(isFetchAll: false);
+        $user = execute(isFetchAll:false);
 
         return [
             'view'  => 'edit',
-            'data' => ['title' => 'Edit', 'user' => $user]
+            'data' => ['title' => 'Edit','user' => $user]
         ];
     }
 
-    public function create()
+    public function create():array
     {
         return [
             'view'  => 'create',
@@ -49,7 +48,7 @@ class User
             'lastName' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'maxlen:5|required',
-        ], persistInputs: true, checkCsrf: true);
+        ], persistInputs:true, checkCsrf:true);
 
         if (!$validate) {
             return redirect('/user/create');
@@ -69,28 +68,25 @@ class User
 
     public function update($args)
     {
-        if (!isset($args['user'])) {
+        if (!isset($args['user']) || $args['user'] !== user()->id) {
             return redirect('/');
         }
 
         $validated = validate([
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|email|uniqueUpdate:users,id=' . $args['user']
+            'email' => 'required|email|uniqueUpdate:users,id='.$args['user']
         ]);
-
 
         if (!$validated) {
             return redirect('/user/edit/profile');
         }
 
-        $updated = update('users', $validated, ['id' => $args['user']]);
+        $updated = update('users', $validated, ['id' => user()->id]);
 
         if ($updated) {
-            setMessageAndRedirect('updated_success', 'Atualizado com sucesso', '/user/edit/profile');
-            return;
+            return setMessageAndRedirect('updated_success', 'Atualizado com sucesso', '/user/edit/profile');
         }
         setMessageAndRedirect('updated_error', 'Ocorreu um erro ao atualizar', '/user/edit/profile');
     }
 }
-

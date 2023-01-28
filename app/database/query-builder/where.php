@@ -84,17 +84,17 @@ function whereTwoParameters(array $args): array
     $value = $args[1];
     $typeWhere = 'or';
 
-    return [$field, $operator, $value, $typeWhere];
+    return [$field,$operator,$value, $typeWhere];
 }
 function whereThreeParameters(array $args): array
 {
-    $operators = ['=', '<', '>', '!==', '<=', '>='];
+    $operators = ['=','<','>','!==','<=','>='];
     $field = $args[0];
     $operator = in_array($args[1], $operators) ? $args[1] : '=';
     $value = in_array($args[1], $operators) ? $args[2] : $args[1];
     $typeWhere = $args[2] === 'and' ? 'and' : 'or';
 
-    return [$field, $operator, $value, $typeWhere];
+    return [$field,$operator,$value, $typeWhere];
 }
 
 function whereIn(string $field, array $data)
@@ -106,7 +106,7 @@ function whereIn(string $field, array $data)
     }
 
     $query['where'] = true;
-    $query['sql'] = "{$query['sql']} where {$field} in (" . '\'' . implode('\',\'', $data) . '\'' . ')';
+    $query['sql'] = "{$query['sql']} where {$field} in (".'\''.implode('\',\'', $data).'\''.')';
 }
 
 

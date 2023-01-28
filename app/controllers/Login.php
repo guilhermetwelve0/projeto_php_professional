@@ -4,13 +4,14 @@ namespace app\controllers;
 
 class Login
 {
-    public function index()
+    public function index(): array
     {
         return [
             'view' => 'login',
             'data' => ['title' => 'Login']
         ];
     }
+
     public function store()
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -20,17 +21,20 @@ class Login
             return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
         }
 
-        //$user = findBy('users', 'email', $email);
-         read('users','users.id,firstName,lastName,email,password,path');
-         tableJoin('photos','id','left');
-         where('email',$email);
+        // $user = findBy('users', 'email', $email);
+
+        read('users', 'users.id,firstName,lastName,email,password,path');
+        tableJoin('photos', 'id', 'left');
+        where('email', $email);
+
         $user = execute(isFetchAll:false);
 
-        //dd($user);
+        // dd($user);
+
         if (!$user) {
             return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
         }
-        
+
         if (!password_verify($password, $user->password)) {
             return setMessageAndRedirect('message', 'Usuário ou senha inválidos', '/login');
         }
@@ -38,11 +42,14 @@ class Login
         unset($user->password);
 
         $_SESSION[LOGGED] = $user;
+
         return redirect('/');
     }
 
-    public function destroy(){
+    public function destroy()
+    {
         unset($_SESSION[LOGGED]);
+
         return redirect('/');
     }
 }

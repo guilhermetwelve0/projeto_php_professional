@@ -10,15 +10,15 @@ class Contact
     {
         return [
             'view' => 'contact',
-            'data' => ['title' => 'Contact'],
+            'data' => ['title' => 'Contact',],
         ];
     }
+
     public function store()
     {
-
         // $email = new stdClass();
         // $email->fromName = 'Alexandre';
-        // $email->fromEmail = 'xandercar@hotmail.com';
+        // $email->fromEmail = 'xandecar@hotmail.com';
         // $email->toName = 'Joao';
         // $email->toEmail = 'joao@email.com.br';
         // $email->subject = 'teste de mensagem';
@@ -29,8 +29,8 @@ class Contact
             'name' => 'required',
             'email' => 'required|email',
             'subject' => 'required',
-            'message' => 'required',
-        ], persistInputs: true, checkCsrf: true);
+            'message' => 'required'
+        ], persistInputs:true, checkCsrf:true);
 
         if (!$validated) {
             return redirect('/contact');
@@ -44,15 +44,11 @@ class Contact
             'subject' => $validated['subject'],
             'message' => $validated['message'],
             'template' => 'contact'
-
         ]);
 
-        
-
-        if($sent){
-            return setMessageAndRedirect('contact_success','Enviado com sucesso','/contact');
+        if ($sent) {
+            return setMessageAndRedirect('contact_success', 'Enviado com sucesso', '/contact');
         }
-            return setMessageAndRedirect('contact_error','Ocorreu um erro ao enviar o email, tente novamente em alguns segundos','/contact');
-        
+        return setMessageAndRedirect('contact_error', 'Ocorreu um erro ao enviar o email, tente novamente em alguns segundos', '/contact');
     }
 }

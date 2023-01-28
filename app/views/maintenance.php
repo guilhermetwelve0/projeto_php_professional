@@ -1,4 +1,5 @@
-<?php $this->layout('master', ['title' => $title]) ?>
+<?php $this->layout('master', ['title' => $title]); ?>
+
 
 <?php $this->start('styles') ?>
 <link rel="stylesheet" href="style_maintenance.css">

@@ -11,7 +11,7 @@ function delete(string $table, array $where)
     $whereField = array_keys($where);
 
     $sql = "delete from {$table} where";
-    $sql .= " {$whereField[0]} = :{$whereField[0]}";
+    $sql.=" {$whereField[0]} = :{$whereField[0]}";
 
     $prepare = $connect->prepare($sql);
     $prepare->execute($where);

@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $this->e($title) ?></title>
     <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <?= $this->section('styles') ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <?=$this->section('styles')?>
 </head>
-
 <body>
+
     <div id="header">
-        <?= $this->insert('partials/header') ?>
+    <?=$this->insert('partials/header')?>
     </div>
     <div class="container">
-        <?= $this->section('content') ?>
+        <?=$this->section('content')?>
     </div>
     <script src="/app.js"></script>
-    <?= $this->section('scripts') ?>
+    <?=$this->section('scripts')?>
 </body>
-
 </html>

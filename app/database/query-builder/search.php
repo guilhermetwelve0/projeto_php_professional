@@ -16,7 +16,7 @@ function search(array $search)
 
     $execute = [];
     foreach ($search as $field => $searched) {
-        $sql .= "{$field} like :{$field} or ";
+        $sql.= "{$field} like :{$field} or ";
         $execute[$field] = "%{$searched}%";
     }
 
