@@ -44,3 +44,10 @@ function execute(bool $isFetchAll = true, bool $rowCount = false)
         ddd($error);
     }
 }
+
+//como resolver esse eero array:4 [▼
+//   "file" => "C:\Users\guilh\Desktop\pastas_cursos\projeto_php_professional\app\database\query-builder\execute.php"
+//   "line" => 19
+//   "message" => "SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens"
+//   "sql" => "select * from users where email = :email and , != :,"
+// ]

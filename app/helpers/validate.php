@@ -44,7 +44,7 @@ function multipleValidations($validate, $field, $param)
             [$validate, $param] = explode(':', $validate);
         }
 
-        //$result[$field] = $validate($field, $param);
+        $result[$field] = $validate($field, $param);
 
         if ($result[$field] === false || $result[$field] === null) {
             break;

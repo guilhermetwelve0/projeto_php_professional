@@ -76,7 +76,7 @@ class User
         $validated = validate([
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|email|uniqueUpdate:id=' . $args['user']
+            'email' => 'required|email|uniqueUpdate:users,id=' . $args['user']
         ]);
 
 
@@ -93,3 +93,4 @@ class User
         setMessageAndRedirect('updated_error', 'Ocorreu um erro ao atualizar', '/user/edit/profile');
     }
 }
+
