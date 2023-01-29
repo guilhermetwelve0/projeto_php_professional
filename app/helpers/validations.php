@@ -102,7 +102,7 @@ function optional($field)
 
 function confirmed($field){
 
-    if(!isset($_POST[$field], $_POST[$field.'password_confirmation'])){
+    if(!isset($_POST[$field], $_POST[$field.'password_confirmation' ])){
         setFlash($field, "Os campos para atualizar a senha são obrigatórios");
         return false;
     }

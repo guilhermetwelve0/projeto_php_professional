@@ -13,7 +13,7 @@
     <button type="submit">Atualizar</button>
 </form>
 
-<hr>
+<!-- <hr>
 <?php echo getFlash('password_success','color:green'); ?>
 <?php echo getFlash('password_error'); ?>
 <form action="/password/user/<?php echo $user->id ?>" method="post">
@@ -27,7 +27,7 @@
     <button type="submit">Atualizar</button>
 </form>
 
-<hr>
+<hr> -->
 
 <?php if ($user->path) : ?>
     <img src="/<?php echo $user->path ?>" alt="">

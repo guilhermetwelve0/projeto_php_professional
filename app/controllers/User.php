@@ -68,7 +68,7 @@ class User
 
     public function update($args)
     {
-        if (!isset($args['user']) || $args['user'] !== user()->id) {
+        if (!isset($args['user'])) {
             return redirect('/');
         }
 
